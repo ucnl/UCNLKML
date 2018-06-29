@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("UCNLKML")]
-[assembly: AssemblyDescription("KML format conversion library")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Underwater communication & navigation laboratory, LLC")]
 [assembly: AssemblyProduct("UCNLKML")]
-[assembly: AssemblyCopyright("© 2015-2017, Underwater communication & navigation laboratory, LLC")]
+[assembly: AssemblyCopyright("© 2015, Underwater communication & navigation laboratory, LLC")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
