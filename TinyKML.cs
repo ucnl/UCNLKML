@@ -56,11 +56,11 @@ namespace UCNLKML
 
                 if (l_splits.Length > 1)
                 {
-                    lon = double.Parse(l_splits[0]);
-                    lat = double.Parse(l_splits[1]);
+                    lon = double.Parse(l_splits[0], CultureInfo.InvariantCulture);
+                    lat = double.Parse(l_splits[1], CultureInfo.InvariantCulture);
 
                     if (l_splits.Length > 2)
-                        alt = double.Parse(l_splits[2]);
+                        alt = double.Parse(l_splits[2], CultureInfo.InvariantCulture);
                 }
                 else
                 {
@@ -74,7 +74,7 @@ namespace UCNLKML
         }
     }
 
-    public abstract class KMLPlacemarkItem
+    public abstract class KMLPlacemarkItem : IList<KMLLocation>
     {
         public bool Extrude { get; set; }
         public bool Tessellate { get; set; }
@@ -92,6 +92,83 @@ namespace UCNLKML
 
             return sb.ToString();
         }
+
+        #region IList
+
+        public int IndexOf(KMLLocation item)
+        {
+            return coordinates.IndexOf(item);
+        }
+
+        public void Insert(int index, KMLLocation item)
+        {
+            coordinates.Insert(index, item);
+        }
+
+        public void RemoveAt(int index)
+        {
+            coordinates.RemoveAt(index);
+        }
+
+        public KMLLocation this[int index]
+        {
+            get
+            {
+                return coordinates[index];
+            }
+            set
+            {
+                coordinates[index] = value;
+            }
+        }
+
+        public void Add(KMLLocation item)
+        {
+            coordinates.Add(item);
+        }
+
+        public void Clear()
+        {
+            coordinates.Clear();
+        }
+
+        public bool Contains(KMLLocation item)
+        {
+            return coordinates.Contains(item);
+        }
+
+        public void CopyTo(KMLLocation[] array, int arrayIndex)
+        {
+            coordinates.CopyTo(array, arrayIndex);
+        }
+
+        public int Count
+        {
+            get { return coordinates.Count; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public bool Remove(KMLLocation item)
+        {
+            return coordinates.Remove(item);
+        }
+
+        public IEnumerator<KMLLocation> GetEnumerator()
+        {
+            return coordinates.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            foreach (var item in coordinates)
+                yield return item;
+        }
+
+        #endregion
     }
 
     public class KMLPoint : KMLPlacemarkItem
